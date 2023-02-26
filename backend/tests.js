@@ -1,5 +1,5 @@
 const assert = require('assert');
-const sendMail = require('./mail');
+const sendMail = require('./emailer');
 
 const dotenv = require('dotenv');
 dotenv.config();
