@@ -1,22 +1,21 @@
 const assert = require('assert');
-const sendMail = require('./emailer');
-
+const emailer = require('./emailer');
 const dotenv = require('dotenv');
 dotenv.config();
 
 // Test sendMail function
-assert.doesNotThrow(() => {
+assert.doesNotThrow(async () => {
     try {
-        sendMail({
-            body: {
-                to: process.env.EMAIL_TEST,
-                subject: 'Test Email',
-                html: '<h1>Hello!</h1><p>This is a test email.</p>'
-            }
-        });
+        await emailer.sendMail(
+                process.env.EMAIL_TEST,
+                'Test Email',
+                null,
+                '<h1>Hello!</h1><p>This is a test email.</p>'
+        );
         console.log('✅ sendMail test 1 passed');
     } catch (err) {
         console.log('❌ sendMail test 1 failed');
+        console.log(err);
     }
 }, undefined, 'sendMail should not throw an error');
 
